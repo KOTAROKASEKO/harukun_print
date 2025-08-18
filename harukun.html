@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代名詞マスタークイズ！</title>
+    <style>
+        /* Google Fontsから楽しいフォントを読み込む */
+        @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+
+        /* ページ全体のスタイル */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #81f7f3, #f781d8); /* 明るいグラデーション */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* クイズ全体のコンテナ */
+        #quiz-container {
+            background-color: rgba(255, 255, 255, 0.9); /* 少し透明な白 */
+            padding: 30px 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            border: 3px solid white;
+        }
+
+        /* タイトルのスタイル */
+        h1 {
+            font-family: 'Mochiy Pop One', sans-serif;
+            color: #ff6347; /* トマト色 */
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+
+        /* 問題のスタイル */
+        .question {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .question p {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #0056b3; /* 濃い青色 */
+            margin-bottom: 15px;
+        }
+
+        /* 選択肢のコンテナ */
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2列に並べる */
+            gap: 15px; /* 選択肢の間のスペース */
+        }
+
+        /* 選択肢のスタイル */
+        .options label {
+            display: block;
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid #bde0fe;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .options label:hover {
+            background-color: #d0eaff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* ラジオボタンを隠す */
+        .options input[type="radio"] {
+            display: none;
+        }
+        
+        /* 選択された選択肢のスタイル */
+        .options input[type="radio"]:checked + label {
+            background-color: #ffdd57; /* 黄色 */
+            border-color: #ffc107;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* ボタンのスタイル */
+        #submit-btn {
+            background: linear-gradient(45deg, #56ab2f, #a8e063); /* 緑のグラデーション */
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(86, 171, 47, 0.4);
+        }
+        
+        /* 結果表示エリアのスタイル */
+        #result {
+            margin-top: 30px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .correct {
+            color: #28a745; /* 緑色 */
+        }
+        
+        .incorrect {
+            color: #dc3545; /* 赤色 */
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h1>代名詞マスタークイズ！</h1>
+    <form id="quiz-form">
+        <!-- 問題1 -->
+        <div class="question">
+            <p>1. (   ) am from Japan.</p>
+            <div class="options">
+                <input type="radio" name="q1" value="a" id="q1a"><label for="q1a">I</label>
+                <input type="radio" name="q1" value="b" id="q1b"><label for="q1b">my</label>
+                <input type="radio" name="q1" value="c" id="q1c"><label for="q1c">me</label>
+                <input type="radio" name="q1" value="d" id="q1d"><label for="q1d">mine</label>
+            </div>
+        </div>
+        <!-- 問題2 -->
+        <div class="question">
+            <p>2. (   ) is my brother.</p>
+            <div class="options">
+                <input type="radio" name="q2" value="a" id="q2a"><label for="q2a">He</label>
+                <input type="radio" name="q2" value="b" id="q2b"><label for="q2b">His</label>
+                <input type="radio" name="q2" value="c" id="q2c"><label for="q2c">Him</label>
+                <input type="radio" name="q2" value="d" id="q2d"><label for="q2d">I</label>
+            </div>
+        </div>
+        <!-- 問題3 -->
+        <div class="question">
+            <p>3. This is (   ) new bike.</p>
+            <div class="options">
+                <input type="radio" name="q3" value="a" id="q3a"><label for="q3a">I</label>
+                <input type="radio" name="q3" value="b" id="q3b"><label for="q3b">my</label>
+                <input type="radio" name="q3" value="c" id="q3c"><label for="q3c">me</label>
+                <input type="radio" name="q3" value="d" id="q3d"><label for="q3d">mine</label>
+            </div>
+        </div>
+        <!-- 問題4 -->
+        <div class="question">
+            <p>4. I know (   ) very well.</p>
+            <div class="options">
+                <input type="radio" name="q4" value="a" id="q4a"><label for="q4a">he</label>
+                <input type="radio" name="q4" value="b" id="q4b"><label for="q4b">his</label>
+                <input type="radio" name="q4" value="c" id="q4c"><label for="q4c">him</label>
+                <input type="radio" name="q4" value="d" id="q4d"><label for="q4d">me</label>
+            </div>
+        </div>
+        <!-- 問題5 -->
+        <div class="question">
+            <p>5. The teacher told (   ) a story.</p>
+            <div class="options">
+                <input type="radio" name="q5" value="a" id="q5a"><label for="q5a">I</label>
+                <input type="radio" name="q5" value="b" id="q5b"><label for="q5b">my</label>
+                <input type="radio" name="q5" value="c" id="q5c"><label for="q5c">me</label>
+                <input type="radio" name="q5" value="d" id="q5d"><label for="q5d">mine</label>
+            </div>
+        </div>
+        <!-- 問題6 -->
+        <div class="question">
+            <p>6. What is (   ) name?</p>
+            <div class="options">
+                <input type="radio" name="q6" value="a" id="q6a"><label for="q6a">he</label>
+                <input type="radio" name="q6" value="b" id="q6b"><label for="q6b">his</label>
+                <input type="radio" name="q6" value="c" id="q6c"><label for="q6c">him</label>
+                <input type="radio" name="q6" value="d" id="q6d"><label for="q6d">my</label>
+            </div>
+        </div>
+        <!-- 問題7 -->
+        <div class="question">
+            <p>7. This red cap is (   ).</p>
+            <div class="options">
+                <input type="radio" name="q7" value="a" id="q7a"><label for="q7a">I</label>
+                <input type="radio" name="q7" value="b" id="q7b"><label for="q7b">my</label>
+                <input type="radio" name="q7" value="c" id="q7c"><label for="q7c">me</label>
+                <input type="radio" name="q7" value="d" id="q7d"><label for="q7d">mine</label>
+            </div>
+        </div>
+        <!-- 問題8 -->
+        <div class="question">
+            <p>8. That computer is (   ).</p>
+            <div class="options">
+                <input type="radio" name="q8" value="a" id="q8a"><label for="q8a">he</label>
+                <input type="radio" name="q8" value="b" id="q8b"><label for="q8b">his</label>
+                <input type="radio" name="q8" value="c" id="q8c"><label for="q8c">him</label>
+                <input type="radio" name="q8" value="d" id="q8d"><label for="q8d">mine</label>
+            </div>
+        </div>
+        <button type="button" id="submit-btn">こたえあわせ</button>
+    </form>
+    <div id="result"></div>
+</div>
+
+<script>
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        // 正しい答え
+        const answers = {
+            q1: 'a', // I
+            q2: 'a', // He
+            q3: 'b', // my
+            q4: 'c', // him
+            q5: 'c', // me
+            q6: 'b', // his
+            q7: 'd', // mine
+            q8: 'b'  // his
+        };
+
+        let score = 0;
+        const totalQuestions = Object.keys(answers).length;
+        const form = document.getElementById('quiz-form');
+        const resultDiv = document.getElementById('result');
+        
+        // 各問題の答えをチェック
+        for (let i = 1; i <= totalQuestions; i++) {
+            const questionName = 'q' + i;
+            const selectedOption = form.elements[questionName].value;
+            if (selectedOption === answers[questionName]) {
+                score++;
+            }
+        }
+        
+        // 結果を表示
+        resultDiv.innerHTML = `<h2>結果は...</h2>`;
+        if (score === totalQuestions) {
+            resultDiv.innerHTML += `<p class="correct">🎉 パーフェクト！全問正解！ 🎉</p>`;
+        } else if (score >= totalQuestions / 2) {
+            resultDiv.innerHTML += `<p class="correct">すごい！ ${score} / ${totalQuestions} 点でした！あともう少し！</p>`;
+        } else {
+            resultDiv.innerHTML += `<p class="incorrect">${score} / ${totalQuestions} 点でした。もう一度挑戦してみよう！</p>`;
+        }
+        
+        // ボタンを隠す
+        document.getElementById('submit-btn').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
