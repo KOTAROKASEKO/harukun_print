@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be動詞マスタークイズ！</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+        }
+        .correct {
+            color: #16a34a; /* green-600 */
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #dc2626; /* red-600 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-yellow-50 flex items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8 m-4">
+        
+        <!-- ヘッダー -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-yellow-500">Be動詞マスタークイズ！</h1>
+            <p class="text-gray-600 mt-2">（is / am / are）のどれかが入るよ！</p>
+        </div>
+
+        <!-- 問題リスト -->
+        <div id="quiz-container" class="space-y-5">
+            <!-- 問題はJavaScriptでここに生成されます -->
+        </div>
+
+        <!-- 答え合わせボタン -->
+        <div class="text-center mt-10">
+            <button id="check-button" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-md transition-transform transform hover:scale-105">
+                答え合わせ！
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            { question: "I (　　) a student.", answer: "am" },
+            { question: "You (　　) kind.", answer: "are" },
+            { question: "He (　　) my brother.", answer: "is" },
+            { question: "She (　　) a teacher.", answer: "is" },
+            { question: "It (　　) a sunny day.", answer: "is" },
+            { question: "We (　　) happy.", answer: "are" },
+            { question: "They (　　) my friends.", answer: "are" },
+            { question: "This dog (　　) cute.", answer: "is" },
+            { question: "My name (　　) Ken.", answer: "is" },
+            { question: "These cats (　　) small.", answer: "are" }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+
+        // 問題をHTMLに表示
+        questions.forEach((q, index) => {
+            const questionElement = document.createElement('div');
+            questionElement.className = "flex items-center justify-between bg-gray-50 p-4 rounded-lg";
+            
+            // 問題文と入力欄
+            const questionText = q.question.replace('(　　)', 
+                `<input type="text" id="q${index}" class="w-16 sm:w-20 text-center border-2 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 mx-2 text-lg">`
+            );
+
+            questionElement.innerHTML = `
+                <div class="flex items-center">
+                    <span class="text-lg font-bold text-gray-500 mr-3">${index + 1}.</span>
+                    <p class="text-lg text-gray-800">${questionText}</p>
+                </div>
+                <div id="result${index}" class="text-lg w-28 text-left ml-4"></div>
+            `;
+            quizContainer.appendChild(questionElement);
+        });
+
+        const checkButton = document.getElementById('check-button');
+
+        // 答え合わせボタンのクリックイベント
+        checkButton.addEventListener('click', () => {
+            questions.forEach((q, index) => {
+                const userInput = document.getElementById(`q${index}`).value.trim().toLowerCase();
+                const resultElement = document.getElementById(`result${index}`);
+
+                if (userInput === q.answer) {
+                    resultElement.textContent = '正解！🎉';
+                    resultElement.className = 'correct text-lg w-28 text-left ml-4';
+                } else {
+                    resultElement.textContent = `こたえ: ${q.answer}`;
+                    resultElement.className = 'incorrect text-lg w-28 text-left ml-4';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
